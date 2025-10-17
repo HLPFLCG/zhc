@@ -1036,3 +1036,43 @@ ul li, ol li {
     color: rgba(255, 255, 255, 0.9);
 }
 
+
+/* ==================== FIX WHITE TEXT ON WHITE BACKGROUND ==================== */
+/* Ensure cards in dark sections have proper contrast */
+.section-dark .value-card {
+    background-color: var(--accent-gray);
+    border-left-color: var(--primary-white);
+}
+
+.section-dark .value-card h4 {
+    color: var(--primary-white);
+}
+
+.section-dark .value-card p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.section-dark .portfolio-card {
+    background-color: var(--accent-gray);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.section-dark .portfolio-card h3 {
+    color: var(--primary-white);
+}
+
+.section-dark .portfolio-card p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.section-dark .portfolio-card .industry-tag {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+}
+
+/* Fix industry tags in dark sections */
+.section-dark .industry-tag {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+}
+
