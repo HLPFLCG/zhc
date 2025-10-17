@@ -8,6 +8,20 @@
     
     <title>Contact Us | Zaitsev Holding Group</title>
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zaitsev.co/">
+    <meta property="og:title" content="Zaitsev Holding Group">
+    <meta property="og:description" content="A Wyoming-based private equity and holding company.">
+    <meta property="og:image" content="https://zaitsev.co/images/Artboard 1zhg3.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zaitsev.co/">
+    <meta property="twitter:title" content="Zaitsev Holding Group">
+    <meta property="twitter:description" content="A Wyoming-based private equity and holding company.">
+    <meta property="twitter:image" content="https://zaitsev.co/images/Artboard 1zhg3.png">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/revisedzhgclearbackground.png">
     
@@ -25,8 +39,10 @@
     <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="images/zaitsevheroclear.png" alt="Zaitsev Holding Text Logo">
@@ -37,12 +53,13 @@
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Page Header -->
     <section class="hero" style="min-height: 50vh;">
         <div class="hero-content">
@@ -267,8 +284,10 @@
         </div>
     </section>
 
+        </main>
+    
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">

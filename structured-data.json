@@ -1,0 +1,35 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Zaitsev Holding Group, LLC",
+  "alternateName": "ZHG",
+  "url": "https://zaitsev.co",
+  "logo": "https://zaitsev.co/images/Artboard 1zhg3.png",
+  "description": "A Wyoming-based private equity and holding company dedicated to acquiring, developing, and managing exceptional businesses across diverse industries.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "Wyoming",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/zaitsev-holding-group",
+    "https://twitter.com/zaitsevholding"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Business Inquiries",
+    "url": "https://zaitsev.co/contact.html"
+  },
+  "owns": [
+    {
+      "@type": "Organization",
+      "name": "The Smoke Shack",
+      "description": "A premier destination offering quality products and exceptional customer service."
+    },
+    {
+      "@type": "Organization",
+      "name": "HLPFL Co",
+      "description": "Innovative solutions and services designed to meet evolving market demands."
+    }
+  ]
+}
