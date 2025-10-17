@@ -91,6 +91,12 @@ a {
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover {
+    opacity: 0.8;
 }
 
 .nav-logo img {
@@ -269,7 +275,7 @@ a {
 
 /* ==================== SECTIONS ==================== */
 .section {
-    padding: 6rem 2rem;
+    padding: 8rem 2rem;
 }
 
 .section-dark {
