@@ -5,10 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const navMenu = document.getElementById('navMenu');
     
+    console.log('Mobile menu toggle:', mobileMenuToggle);
+    console.log('Nav menu:', navMenu);
+    
     if (mobileMenuToggle && navMenu) {
-        mobileMenuToggle.addEventListener('click', function() {
+        console.log('Mobile menu elements found, adding event listener');
+        
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Mobile menu toggle clicked');
+            
             const isExpanded = navMenu.classList.contains('active');
             navMenu.classList.toggle('active');
+            
+            console.log('Menu active state:', navMenu.classList.contains('active'));
             
             // Update ARIA attributes
             this.setAttribute('aria-expanded', !isExpanded);
