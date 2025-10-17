@@ -482,6 +482,12 @@ a {
     margin-top: 3rem;
 }
 
+/* 2x2 grid for index.html investment philosophy */
+.values-grid-2x2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
 .value-card {
     padding: 2rem;
     background-color: var(--primary-white);
@@ -688,6 +694,11 @@ a {
     .values-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    /* Keep 2x2 grid on tablet for index.html */
+    .values-grid-2x2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -758,6 +769,11 @@ a {
     }
     
     .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Stack 2x2 grid to single column on mobile */
+    .values-grid-2x2 {
         grid-template-columns: 1fr;
     }
     
