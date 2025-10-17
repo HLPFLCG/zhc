@@ -590,13 +590,16 @@ a {
    }
    
    .footer-bottom {
-       max-width: 1400px;
-       margin: 0 auto;
-       padding-top: 2rem;
-       border-top: 1px solid var(--border-gray);
-       text-align: center;
-       color: rgba(255, 255, 255, 0.5);
-   }
+  display: block;          /* ensure block-level */
+  width: 100%;             /* allow it to span its container */
+  max-width: 1400px;
+  margin: 0 auto;          /* centers within parent */
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-gray);
+  text-align: center;      /* centers inline content (text, inline elements) */
+  color: rgba(255, 255, 255, 0.5);
+}
+
    /* ==================== ANIMATIONS ==================== */
 @keyframes fadeInUp {
     from {
