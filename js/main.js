@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (mobileMenuToggle && navMenu) {
         mobileMenuToggle.addEventListener('click', function() {
+            const isExpanded = navMenu.classList.contains('active');
             navMenu.classList.toggle('active');
+            
+            // Update ARIA attributes
+            this.setAttribute('aria-expanded', !isExpanded);
             
             // Toggle icon between bars and times
             const icon = this.querySelector('i');
@@ -25,10 +29,36 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
                 const icon = mobileMenuToggle.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    const icon = mobileMenuToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+        
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileMenuToggle.focus();
+            }
         });
     }
 });
@@ -60,41 +90,97 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Contact Form Handling
+// Contact Form Handling with Validation
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
+    // Real-time validation
+    const inputs = contactForm.querySelectorAll('input[required], textarea[required], select[required]');
+    
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            validateField(this);
         });
         
-        // Show success message (in production, this would send to a backend)
-        alert('Thank you for your message! We will get back to you within 1-2 business days.');
+        input.addEventListener('input', function() {
+            if (this.classList.contains('error')) {
+                validateField(this);
+            }
+        });
+    });
+    
+    function validateField(field) {
+        const formGroup = field.closest('.form-group');
+        const errorMsg = formGroup.querySelector('.form-error') || createErrorElement(formGroup);
         
-        // Reset form
-        contactForm.reset();
+        // Remove previous states
+        formGroup.classList.remove('error', 'success');
         
-        // In production, you would send this data to your backend:
-        // fetch('/api/contact', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data)
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     alert('Thank you for your message! We will get back to you soon.');
-        //     contactForm.reset();
-        // })
-        // .catch(error => {
-        //     alert('There was an error sending your message. Please try again.');
-        // });
+        if (!field.value.trim()) {
+            formGroup.classList.add('error');
+            errorMsg.textContent = 'This field is required';
+            return false;
+        }
+        
+        // Email validation
+        if (field.type === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(field.value)) {
+                formGroup.classList.add('error');
+                errorMsg.textContent = 'Please enter a valid email address';
+                return false;
+            }
+        }
+        
+        // Phone validation (optional but if filled, should be valid)
+        if (field.type === 'tel' &amp;&amp; field.value.trim()) {
+            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+            if (!phoneRegex.test(field.value)) {
+                formGroup.classList.add('error');
+                errorMsg.textContent = 'Please enter a valid phone number';
+                return false;
+            }
+        }
+        
+        formGroup.classList.add('success');
+        return true;
+    }
+    
+    function createErrorElement(formGroup) {
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'form-error';
+        formGroup.appendChild(errorMsg);
+        return errorMsg;
+    }
+    
+    contactForm.addEventListener('submit', function(e) {
+        // Validate all fields before submission
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!validateField(input)) {
+                isValid = false;
+            }
+        });
+        
+        if (!isValid) {
+            e.preventDefault();
+            // Scroll to first error
+            const firstError = contactForm.querySelector('.form-group.error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.querySelector('input, textarea, select').focus();
+            }
+            return;
+        }
+        
+        // Add loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        // Form will submit to Formspree naturally
+        // The loading state will show until page redirects
     });
 }
 
@@ -140,7 +226,89 @@ function setActiveNavLink() {
 
 document.addEventListener('DOMContentLoaded', setActiveNavLink);
 
+// Back to Top Button
+const backToTopButton = document.createElement('button');
+backToTopButton.className = 'back-to-top';
+backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+backToTopButton.setAttribute('aria-label', 'Back to top');
+document.body.appendChild(backToTopButton);
+
+// Show/hide back to top button
+window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+    } else {
+        backToTopButton.classList.remove('visible');
+    }
+});
+
+// Scroll to top on click
+backToTopButton.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
 // Prevent form resubmission on page refresh
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
 }
+
+// Track button clicks for analytics (when GA is added)
+document.querySelectorAll('.btn, .nav-menu a').forEach(element => {
+    element.addEventListener('click', function() {
+        const text = this.textContent.trim();
+        const href = this.getAttribute('href');
+        // When Google Analytics is added, track with:
+        // gtag('event', 'click', { 'event_category': 'Button', 'event_label': text });
+        console.log('Button clicked:', text, href);
+    });
+});
+
+// Lazy load images (for future optimization)
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            }
+        });
+    });
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Announce page changes for screen readers
+function announcePageChange(message) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.className = 'sr-only';
+    announcement.textContent = message;
+    document.body.appendChild(announcement);
+    
+    setTimeout(() => {
+        document.body.removeChild(announcement);
+    }, 1000);
+}
+
+// Keyboard navigation improvements
+document.addEventListener('keydown', function(e) {
+    // Skip to main content with Ctrl+/
+    if (e.ctrlKey && e.key === '/') {
+        e.preventDefault();
+        const mainContent = document.querySelector('main') || document.querySelector('.hero');
+        if (mainContent) {
+            mainContent.focus();
+            mainContent.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
