@@ -1129,6 +1129,11 @@ ul li, ol li {
     color: rgba(255, 255, 255, 0.85);
 }
 
+/* Fix checkmark visibility in dark sections */
+.section-dark .fa-check-circle {
+    color: var(--primary-white) !important;
+}
+
 .section-dark .portfolio-card {
     background-color: var(--accent-gray);
     border-color: rgba(255, 255, 255, 0.2);
