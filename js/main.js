@@ -132,14 +132,15 @@ if (contactForm) {
         }
         
         // Phone validation (optional but if filled, should be valid)
-        if (field.type === 'tel' &amp;&amp; field.value.trim()) {
-            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-            if (!phoneRegex.test(field.value)) {
-                formGroup.classList.add('error');
-                errorMsg.textContent = 'Please enter a valid phone number';
-                return false;
-            }
+        if (field.type === 'tel' && field.value.trim()) {
+          const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+          if (!phoneRegex.test(field.value)) {
+            formGroup.classList.add('error');
+            errorMsg.textContent = 'Please enter a valid phone number';
+            return false;
+          }
         }
+
         
         formGroup.classList.add('success');
         return true;
