@@ -170,6 +170,16 @@ a {
     color: var(--primary-white);
     font-size: 1.5rem;
     cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+    transform: scale(1.1);
+}
+
+.mobile-menu-toggle:active {
+    transform: scale(0.95);
 }
 
 /* ==================== HERO SECTION ==================== */
@@ -669,8 +679,13 @@ a {
     }
     
     .mobile-menu-toggle {
-        display: block;
-        z-index: 1000;
+        display: block !important;
+        z-index: 1001;
+        position: relative;
+    }
+    
+    .nav-container {
+        padding: 0 1rem;
     }
     
     .hero {
