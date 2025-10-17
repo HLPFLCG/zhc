@@ -428,6 +428,14 @@ a {
 .stat-card {
     text-align: center;
     padding: 2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .stat-number {
@@ -435,6 +443,12 @@ a {
     font-weight: 700;
     color: var(--primary-white);
     margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-number {
+    transform: scale(1.1);
+    color: var(--primary-blue);
 }
 
 .stat-label {
@@ -463,7 +477,7 @@ a {
 
 .values-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -472,11 +486,32 @@ a {
     padding: 2rem;
     background-color: var(--primary-white);
     border-left: 4px solid var(--primary-black);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    border-left-width: 6px;
 }
 
 .value-card h4 {
     margin-bottom: 1rem;
     color: var(--primary-black);
+    transition: color 0.3s ease;
+}
+
+.value-card:hover h4 {
+    color: var(--primary-blue);
+}
+
+.value-card h4 i {
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover h4 i {
+    transform: scale(1.2);
 }
 
 .value-card p {
@@ -1129,8 +1164,17 @@ ul li, ol li {
     border-left-color: var(--primary-white);
 }
 
+.section-dark .value-card:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
 .section-dark .value-card h4 {
     color: var(--primary-white);
+}
+
+.section-dark .value-card:hover h4 {
+    color: var(--primary-blue);
 }
 
 .section-dark .value-card p {
