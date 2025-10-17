@@ -539,62 +539,65 @@ a {
 
 /* ==================== FOOTER ==================== */
 .footer {
-    background-color: var(--primary-black);
-    color: var(--primary-white);
-    padding: 4rem 2rem 2rem;
-}
-
-.footer-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-logo img {
-    height: 60px;
-    margin-bottom: 1rem;
-}
-
-.footer-description {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1.5rem;
-}
-
-.footer-section h4 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-white);
-}
-
-.footer-links {
-    list-style: none;
-}
-
-.footer-links li {
-    margin-bottom: 0.8rem;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.7);
-    transition: var(--transition-smooth);
-}
-
-.footer-links a:hover {
-    color: var(--primary-white);
-}
-
-.footer-bottom {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-gray);
-    text-align: center;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/* ==================== ANIMATIONS ==================== */
+       background-color: var(--primary-black);
+       color: var(--primary-white);
+       padding: 4rem 2rem 2rem;
+   }
+   
+   .footer-content {
+       max-width: 1400px;
+       margin: 0 auto;
+       display: grid;
+       grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr;
+       gap: 2rem;
+       margin-bottom: 3rem;
+   }
+   
+   .footer-logo img {
+       height: 60px;
+       margin-bottom: 1rem;
+   }
+   
+   .footer-description {
+       color: rgba(255, 255, 255, 0.7);
+       margin-bottom: 1.5rem;
+   }
+   
+   .footer-section h4 {
+       margin-bottom: 1.5rem;
+       color: var(--primary-white);
+   }
+   
+   .footer-section {
+       min-width: 0;
+   }
+   
+   .footer-links {
+       list-style: none;
+   }
+   
+   .footer-links li {
+       margin-bottom: 0.8rem;
+   }
+   
+   .footer-links a {
+       color: rgba(255, 255, 255, 0.7);
+       transition: var(--transition-smooth);
+   }
+   
+   .footer-links a:hover {
+       color: var(--primary-white);
+   }
+   
+   .footer-bottom {
+       max-width: 1400px;
+       margin: 0 auto;
+       padding-top: 2rem;
+       border-top: 1px solid var(--border-gray);
+       text-align: center;
+       color: rgba(255, 255, 255, 0.5);
+   }
+   /* ==================== ANIMATIONS ==================== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
