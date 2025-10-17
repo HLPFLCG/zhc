@@ -382,6 +382,19 @@ a {
     margin-bottom: 1.5rem;
 }
 
+/* General industry tag styles */
+.industry-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+}
+
 .portfolio-card .industry-tag {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -648,6 +661,7 @@ a {
         gap: 1.5rem;
         transition: left 0.3s ease;
         align-items: flex-start;
+        z-index: 999;
     }
     
     .nav-menu.active {
@@ -656,14 +670,20 @@ a {
     
     .mobile-menu-toggle {
         display: block;
+        z-index: 1000;
     }
     
     .hero {
-        padding: 6rem 1rem 3rem;
+        padding: 8rem 1rem 3rem;
+        text-align: center;
     }
     
     .hero h1 {
         font-size: 2.5rem;
+    }
+    
+    .hero-content {
+        padding-top: 2rem;
     }
     
     .hero-logo {
@@ -687,8 +707,44 @@ a {
         grid-template-columns: 1fr;
     }
     
+    .footer-bottom {
+        text-align: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .footer-bottom p {
+        text-align: center;
+    }
+    
     .section {
         padding: 4rem 1rem;
+    }
+    
+    /* Fix white text on white background for industry tags */
+    .section-light .industry-tag {
+        background-color: var(--primary-black);
+        color: var(--primary-white);
+    }
+    
+    /* Center contact page text on mobile */
+    .contact-info,
+    .contact-details,
+    .contact-item {
+        text-align: center;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contact-item-icon {
+        margin-bottom: 1rem;
+    }
+    
+    .contact-container {
+        text-align: center;
     }
 }
 
