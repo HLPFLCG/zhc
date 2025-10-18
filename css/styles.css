@@ -508,6 +508,19 @@ a {
     letter-spacing: 0.1em;
 }
 
+/* Stat cards in light sections */
+.section-light .stat-number {
+    color: var(--primary-black);
+}
+
+.section-light .stat-label {
+    color: var(--text-gray);
+}
+
+.section-light .stat-card:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
 /* ==================== ABOUT SECTION ==================== */
 .about-content {
     display: grid;
@@ -1230,6 +1243,53 @@ ul li, ol li {
     color: rgba(255, 255, 255, 0.9);
 }
 
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 {
+    color: var(--primary-white);
+}
+
+.section-light h2,
+.section-light h3,
+.section-light h4 {
+    color: var(--primary-black);
+}
+
+.section-light p,
+.section-light li {
+    color: var(--text-gray);
+}
+
+/* Ensure all text elements have proper contrast */
+.section-dark .section-title,
+.section-dark .section-subtitle,
+.section-dark .about-text h2,
+.section-dark .about-text p {
+    color: var(--primary-white);
+}
+
+.section-light .section-title,
+.section-light .section-subtitle,
+.section-light .about-text h2,
+.section-light .about-text p {
+    color: var(--primary-black);
+}
+
+/* Portfolio card text in dark sections */
+.section-dark .portfolio-card h3,
+.section-dark .portfolio-card p {
+    color: var(--primary-black);
+}
+
+/* Ensure links are visible on both backgrounds */
+.section-dark a {
+    color: var(--primary-blue);
+}
+
+.section-light a {
+    color: var(--primary-blue);
+}
+
 
 /* ==================== FIX WHITE TEXT ON WHITE BACKGROUND ==================== */
 /* Ensure cards in dark sections have proper contrast */
@@ -1253,6 +1313,29 @@ ul li, ol li {
 
 .section-dark .value-card p {
     color: rgba(255, 255, 255, 0.85);
+}
+
+/* Value cards in light sections */
+.section-light .value-card {
+    background-color: var(--primary-white);
+    border-left-color: var(--primary-blue);
+}
+
+.section-light .value-card h4 {
+    color: var(--primary-black);
+}
+
+.section-light .value-card p {
+    color: var(--text-gray);
+}
+
+.section-light .value-card:hover {
+    background-color: rgba(41, 98, 255, 0.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.section-light .value-card:hover h4 {
+    color: var(--primary-blue);
 }
 
 /* Fix checkmark visibility in dark sections */
