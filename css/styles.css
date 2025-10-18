@@ -755,6 +755,15 @@ a {
         grid-template-columns: 1fr;
     }
     
+    /* Reorder contact sections on mobile - form first, then info */
+    .contact-form {
+        order: 1;
+    }
+    
+    .contact-info {
+        order: 2;
+    }
+    
     .footer-content {
         grid-template-columns: 1fr 1fr;
     }
