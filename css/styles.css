@@ -1326,7 +1326,24 @@ ul li, ol li {
 }
 
 .section-light .value-card p {
-    color: var(--text-gray);
+    color: var(--primary-black);
+}
+
+.section-light .value-card h4 i {
+    color: var(--primary-black);
+}
+
+/* Ensure portfolio cards have black text in light sections */
+.section-light .portfolio-card h3,
+.section-light .portfolio-card p,
+.section-light .portfolio-card li {
+    color: var(--primary-black);
+}
+
+/* Ensure list items in light sections have black text */
+.section-light ul li,
+.section-light ol li {
+    color: var(--primary-black);
 }
 
 .section-light .value-card:hover {
