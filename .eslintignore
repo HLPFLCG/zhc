@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+reports/
+
+# Cache
+.cache/
+.next/
+.vscode/
+
+# Config files
+jest.config.js
+playwright.config.js
+babel.config.js
+
+# Test files
+*.test.js
+*.spec.js
+
+# Minified files
+*.min.js
+*.min.css
+
+# Third-party
+js/accessibility-test.js
+js/security.js
+js/performance.js
+js/accessibility.js
+
+# Documentation
+*.md

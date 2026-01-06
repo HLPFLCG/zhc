@@ -1,0 +1,38 @@
+{
+  "$schema": "./node_modules/stryker/schema/stryker-schema.json",
+  "_comment": "This config was generated using 'stryker init'. Please see the guide for more information: https://stryker-mutator.io/docs/stryker-js/guides/getting-started",
+  "packageManager": "npm",
+  "reporters": [
+    "html",
+    "clear-text",
+    "progress",
+    "dashboard"
+  ],
+  "testRunner": "jest",
+  "testRunner_comment": "Take a look at https://stryker-mutator.io/docs/stryker-js/jest-runner for information about the jest plugin.",
+  "coverageAnalysis": "perTest",
+  "htmlReporter": {
+    "fileName": "reports/mutation/mutation-report.html"
+  },
+  "tempDirName": ".stryker-tmp",
+  "mutate": [
+    "js/**/*.js",
+    "!js/**/*.test.js",
+    "!js/accessibility-test.js",
+    "!js/security.js",
+    "!js/performance.js",
+    "!js/accessibility.js",
+    "!js/**/node_modules/**"
+  ],
+  "dashboard": {
+    "project": "zhc-website",
+    "version": "1.0.0",
+    "module": "main",
+    "baseUrl": "https://dashboard.stryker-mutator.io/api/reports"
+  },
+  "thresholds": {
+    "high": 80,
+    "low": 70,
+    "break": 70
+  }
+}
