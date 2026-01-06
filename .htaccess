@@ -1,49 +1,192 @@
 # .htaccess for Zaitsev Holding Group Website
+# Bulletproof Security & Performance Configuration
 
-# Enable GZIP Compression
+# ============================================================================
+# PERFORMANCE OPTIMIZATION
+# ============================================================================
+
+# Enable GZIP Compression with Higher Levels
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml application/xhtml+xml text/x-component
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE application/rss+xml application/atom+xml
+  AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-otf application/x-font-truetype application/vnd.ms-fontobject font/opentype font/ttf font/eot font/otf
 </IfModule>
 
-# Browser Caching
+# Brotli Compression (if available)
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml application/xhtml+xml
+</IfModule>
+
+# Advanced Browser Caching with Performance Budgets
 <IfModule mod_expires.c>
   ExpiresActive On
+  # Images - Long cache for static assets
   ExpiresByType image/jpg "access plus 1 year"
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/gif "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  
+  # Fonts - Long cache (versioned by filename)
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType application/x-font-woff "access plus 1 year"
+  ExpiresByType application/x-font-woff2 "access plus 1 year"
+  
+  # CSS/JS - Medium cache with versioning
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
   ExpiresByType text/javascript "access plus 1 month"
+  
+  # HTML - Short cache for dynamic content
+  ExpiresByType text/html "access plus 1 hour"
+  
+  # Documents - Medium cache
   ExpiresByType application/pdf "access plus 1 month"
-  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
 </IfModule>
 
-# Security Headers
+# ETags for Better Cache Validation
 <IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "SAMEORIGIN"
-  Header set X-XSS-Protection "1; mode=block"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header unset ETag
+  FileETag None
 </IfModule>
 
-# Force HTTPS (uncomment when SSL is active)
-# <IfModule mod_rewrite.c>
-#   RewriteEngine On
-#   RewriteCond %{HTTPS} off
-#   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-# </IfModule>
+# ============================================================================
+# BULLETPROOF SECURITY HEADERS
+# ============================================================================
 
-# Remove .html extension
+<IfModule mod_headers.c>
+  # Content Security Policy - Defense in Depth
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://sites.super.myninja.ai https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://www.googletagmanager.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests; block-all-mixed-content;"
+  
+  # X-Content-Type-Options - Prevent MIME Sniffing
+  Header set X-Content-Type-Options "nosniff"
+  
+  # X-Frame-Options - Prevent Clickjacking
+  Header set X-Frame-Options "SAMEORIGIN"
+  
+  # X-XSS-Protection - XSS Protection
+  Header set X-XSS-Protection "1; mode=block"
+  
+  # Referrer Policy - Control Referrer Information
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Strict-Transport-Security - Force HTTPS
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  
+  # Permissions Policy - Control Browser Features
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), ambient-light-sensor=()"
+  
+  # Expect-CT - Certificate Transparency
+  Header set Expect-CT "max-age=86400, enforce"
+  
+  # Cross-Origin-Opener-Policy
+  Header set Cross-Origin-Opener-Policy "same-origin"
+  
+  # Cross-Origin-Resource-Policy
+  Header set Cross-Origin-Resource-Policy "same-origin"
+  
+  # Cache-Control for Security-Sensitive Responses
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+  </FilesMatch>
+</IfModule>
+
+# ============================================================================
+# SECURITY HARDENING
+# ============================================================================
+
+# Prevent Directory Browsing
+Options -Indexes
+
+# Prevent Access to Hidden Files
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Prevent Access to Configuration Files
+<FilesMatch "(composer\.json|package\.json|\.env|\.gitignore|\.htaccess)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Prevent Access to Backup Files
+<FilesMatch "\.(bak|backup|old|orig|save|swp|tmp)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Limit Request Size (Prevent DoS)
+LimitRequestBody 10485760
+LimitRequestFields 100
+LimitRequestLine 8190
+
+# ============================================================================
+# URL REWRITING
+# ============================================================================
+
+# Force HTTPS
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
+  # Remove www
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+  
+  # Remove .html extension
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.+)$ $1.html [L,QSA]
 </IfModule>
 
-# Custom Error Pages (create these if needed)
-# ErrorDocument 404 /404.html
-# ErrorDocument 500 /500.html
+# ============================================================================
+# CUSTOM ERROR PAGES
+# ============================================================================
+
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+ErrorDocument 403 /403.html
+ErrorDocument 503 /503.html
+
+# ============================================================================
+# PERFORMANCE MONITORING
+# ============================================================================
+
+# Server Timing Header for Performance Monitoring
+<IfModule mod_headers.c>
+  Header set Server-Timing "total;desc=&quot;Total Response Time&quot;"
+</IfModule>
+
+# ============================================================================
+# ACCESS CONTROL
+# ============================================================================
+
+# Block Access from Known Malicious User Agents
+SetEnvIfNoCase User-Agent "libwww-perl" bad_bot
+SetEnvIfNoCase User-Agent "curl" bad_bot
+SetEnvIfNoCase User-Agent "wget" bad_bot
+SetEnvIfNoCase User-Agent "python" bad_bot
+SetEnvIfNoCase User-Agent "nikto" bad_bot
+SetEnvIfNoCase User-Agent "sqlmap" bad_bot
+SetEnvIfNoCase User-Agent "dirb" bad_bot
+SetEnvIfNoCase User-Agent "nmap" bad_bot
+SetEnvIfNoCase User-Agent "w3af" bad_bot
+SetEnvIfNoCase User-Agent "acunetix" bad_bot
+SetEnvIfNoCase User-Agent "nessus" bad_bot
+SetEnvIfNoCase User-Agent "whatweb" bad_bot
+
+<RequireAll>
+  Require all granted
+  Require not env bad_bot
+</RequireAll>

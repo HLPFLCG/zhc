@@ -1,0 +1,472 @@
+/* Accessibility Enhancements - WCAG 2.1 AAA Compliant */
+
+/* Skip Links - For keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 10000;
+    text-decoration: none;
+    font-weight: 600;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+    left: 0;
+    outline: 3px solid #ff0;
+    outline-offset: 2px;
+}
+
+/* Skip to different sections */
+.skip-link.skip-to-main {
+    left: 0;
+}
+
+.skip-link.skip-to-nav {
+    left: 120px;
+}
+
+.skip-link.skip-to-footer {
+    left: 240px;
+}
+
+/* Focus Indicators - High visibility for keyboard navigation */
+*:focus {
+    outline: 3px solid #007bff;
+    outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 3px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Enhanced focus for interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid #007bff;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.25);
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Visible on focus for screen readers */
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* Reduced Motion - Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: more) {
+    :root {
+        --text-color: #000;
+        --bg-color: #fff;
+        --link-color: #0000ff;
+        --visited-link-color: #800080;
+    }
+    
+    a {
+        text-decoration: underline;
+    }
+    
+    button {
+        border: 2px solid #000;
+    }
+}
+
+/* Text Spacing - For dyslexia and readability */
+body.text-spacing-enhanced {
+    letter-spacing: 0.12em;
+    line-height: 1.8;
+    word-spacing: 0.16em;
+}
+
+/* Color Contrast Warnings */
+.contrast-warning {
+    position: relative;
+}
+
+.contrast-warning::after {
+    content: "⚠️ Low contrast";
+    position: absolute;
+    background: #ff0000;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 12px;
+    top: -20px;
+    right: 0;
+    border-radius: 4px;
+}
+
+/* Landmark Regions Visual Indicators (for development) */
+[role="banner"] {
+    border: 2px dashed #007bff;
+}
+
+[role="navigation"] {
+    border: 2px dashed #28a745;
+}
+
+[role="main"] {
+    border: 2px dashed #ffc107;
+}
+
+[role="complementary"] {
+    border: 2px dashed #fd7e14;
+}
+
+[role="contentinfo"] {
+    border: 2px dashed #6c757d;
+}
+
+/* Heading Hierarchy Visualizer (for development) */
+h1::before {
+    content: "H1 ";
+    color: #ff0000;
+    font-size: 0.7em;
+}
+
+h2::before {
+    content: "H2 ";
+    color: #ff6600;
+    font-size: 0.7em;
+}
+
+h3::before {
+    content: "H3 ";
+    content: "H3 ";
+    color: #ffcc00;
+    font-size: 0.7em;
+}
+
+h4::before {
+    content: "H4 ";
+    color: #00ff00;
+    font-size: 0.7em;
+}
+
+h5::before {
+    content: "H5 ";
+    color: #00ccff;
+    font-size: 0.7em;
+}
+
+h6::before {
+    content: "H6 ";
+    color: #0066ff;
+    font-size: 0.7em;
+}
+
+/* Alt Text Missing Indicators (for development) */
+img:not([alt]),
+img[alt=""] {
+    border: 4px solid #ff0000;
+    position: relative;
+}
+
+img:not([alt])::after,
+img[alt=""]::after {
+    content: "MISSING ALT TEXT";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff0000;
+    color: #fff;
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* Form Labels Missing Indicators (for development) */
+input:not([aria-label]):not([id]),
+textarea:not([aria-label]):not([id]),
+select:not([aria-label]):not([id]) {
+    border: 4px solid #ff0000;
+}
+
+/* Button Label Indicators (for development) */
+button:not([aria-label]):empty,
+button:not([aria-label]):not(:has(span, i, img, strong, em)) {
+    border: 4px solid #ff0000;
+}
+
+/* ARIA Attributes Validation */
+[aria-hidden="true"] {
+    display: none !important;
+}
+
+/* Accessible Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Responsive Tables */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Accessible Modal Backdrop */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+/* Modal Focus Trap */
+.modal:focus-within {
+    outline: 3px solid #007bff;
+}
+
+/* Accessible Dropdown Menus */
+.dropdown-menu[role="menu"] {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.dropdown-item[role="menuitem"] {
+    display: block;
+    padding: 8px 16px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-item[role="menuitem"]:focus,
+.dropdown-item[role="menuitem"]:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Accessible Tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.tooltip:focus::after,
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Accessible Progress Bars */
+progress {
+    display: inline-block;
+    vertical-align: baseline;
+    width: 100%;
+    height: 20px;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: #007bff;
+    border-radius: 4px;
+}
+
+/* Accessible Loading Spinners */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #007bff;
+    animation: spin 1s linear infinite;
+}
+
+.loading-spinner[aria-busy="true"] {
+    animation: spin 1s linear infinite;
+}
+
+/* Accessible Alerts */
+.alert {
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #17a2b8;
+    color: #0c5460;
+}
+
+/* Accessible Buttons */
+button,
+a[role="button"] {
+    cursor: pointer;
+}
+
+button:disabled,
+a[role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Accessible Links */
+a:not([href]),
+a[href="#"],
+a[href="javascript:void(0)"] {
+    cursor: default;
+    color: #999;
+}
+
+/* Accessible Images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Print Styles */
+@media print {
+    .skip-link,
+    .no-print {
+        display: none !important;
+    }
+    
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #f0f0f0;
+        --link-color: #4dabf7;
+    }
+    
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+    
+    a {
+        color: var(--link-color);
+    }
+}

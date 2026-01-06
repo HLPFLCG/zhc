@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+reports
+
+# Cache
+.cache
+.next
+.vscode
+
+# Git
+.git
+.gitignore
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Config files
+.eslintrc.json
+.prettierrc.json
+
+# Documentation
+*.md
+
+# Other
+.DS_Store
+*.min.js
+*.min.css
