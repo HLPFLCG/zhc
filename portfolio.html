@@ -44,9 +44,16 @@
     
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Accessibility Stylesheet -->
+    <link rel="stylesheet" href="css/a11y.css">
     <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
+    <!-- Skip Links for Keyboard Navigation -->
+    <a href="#main-content" class="skip-link skip-to-main">Skip to main content</a>
+    <a href="#navMenu" class="skip-link skip-to-nav">Skip to navigation</a>
+    <a href="#footer" class="skip-link skip-to-footer">Skip to footer</a>
+
     <!-- Navigation -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
@@ -773,7 +780,7 @@
         </main>
     
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer" role="contentinfo" id="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
@@ -825,6 +832,9 @@
     <script src="js/security.js"></script>
     <script src="js/performance.js"></script>
     <script src="js/accessibility.js"></script>
+    
+    <!-- Accessibility Testing -->
+    <script src="js/accessibility-test.js"></script>
     
     <!-- Application Scripts -->
     <script src="js/main.js"></script>
